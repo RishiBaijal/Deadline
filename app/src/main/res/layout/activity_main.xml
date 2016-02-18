@@ -1,5 +1,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,6 +17,22 @@
         android:layout_height="match_parent"
         android:id="@+id/list"
         android:layout_weight="1"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="98dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_menu_add"
+        app:layout_anchor="@id/list"
+        app:layout_anchorGravity="top|left|end"
+        app:backgroundTint="#2e20ff"
+        app:rippleColor="#ff003d"
+        android:onClick = "addTask"/>
+
+<!--</android.support.design.widget.CoordinatorLayout>-->
+
 
     <!--<LinearLayout-->
         <!--android:layout_width="fill_parent"-->

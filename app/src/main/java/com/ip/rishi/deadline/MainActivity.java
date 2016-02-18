@@ -42,8 +42,7 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    private void updateUI()
-    {
+    private void updateUI() {
         taskDBHelper = new TaskDBHelper(MainActivity.this);
         SQLiteDatabase sqlDatabase = taskDBHelper.getReadableDatabase();
         Cursor cursor = sqlDatabase.query(TaskContract.TABLE, new String[]{TaskContract.Columns.ID, TaskContract.Columns.TASK}, null, null, null, null, null);
@@ -51,8 +50,8 @@ public class MainActivity extends ActionBarActivity {
         listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(listAdapter);
     }
-    public void onDoneButtonClick(View view)
-    {
+
+    public void onDoneButtonClick(View view) {
         View v = (View) view.getParent();
         TextView taskTextView = (TextView) v.findViewById(R.id.taskTextView);
         String task = taskTextView.getText().toString();
@@ -92,6 +91,45 @@ public class MainActivity extends ActionBarActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public void addTask(View view)
+    {
+//        int id = item.getItemId();
+//        switch (id)
+        {
+        //    case R.id.action_add_task:
+                Log.d("MainActivity", "New task has been added");
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Add a task");
+                builder.setMessage("Please add your task here:");
+                final EditText inputField = new EditText(this);
+                builder.setView(inputField);
+                builder.setPositiveButton("Add", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i)
+                    {
+                        Log.d("MainActivity", inputField.getText().toString());
+                        String task = inputField.getText().toString();
+
+                        taskDBHelper = new TaskDBHelper(MainActivity.this);
+                        SQLiteDatabase sqLiteDatabase = taskDBHelper.getWritableDatabase();
+                        ContentValues values = new ContentValues();
+                        values.clear();
+                        values.put(TaskContract.Columns.TASK, task);
+                        sqLiteDatabase.insertWithOnConflict(TaskContract.TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+                        updateUI();
+
+                    }
+                });
+                builder.setNegativeButton("Cancel", null);
+                builder.create().show();
+//                return true;
+//            default:
+//                return false;
+        }
+
+
     }
 //
     @Override
