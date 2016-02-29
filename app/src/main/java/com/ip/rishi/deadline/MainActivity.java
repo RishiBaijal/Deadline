@@ -3,6 +3,7 @@ package com.ip.rishi.deadline;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -42,6 +43,13 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    protected void onResume()
+    {
+        super.onResume();
+        updateUI();
+
+    }
+
     private void updateUI() {
         taskDBHelper = new TaskDBHelper(MainActivity.this);
         SQLiteDatabase sqlDatabase = taskDBHelper.getReadableDatabase();
@@ -49,6 +57,19 @@ public class MainActivity extends ActionBarActivity {
         listAdapter = new SimpleCursorAdapter(this, R.layout.task_view, cursor, new String[]{TaskContract.Columns.TASK}, new int[]{R.id.taskTextView, 0});
         listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(listAdapter);
+    }
+
+    public void onFriendButtonClick(View view)
+    {
+        Intent intent = new Intent(this, FriendActivity.class);
+        startActivity(intent);
+    }
+
+    public void onDeadlineButtonClick(View view)
+    {
+        Intent intent = new Intent(this, DeadlineActivity.class);
+        startActivity(intent);
+
     }
 
     public void onDoneButtonClick(View view) {
@@ -95,83 +116,86 @@ public class MainActivity extends ActionBarActivity {
 
     public void addTask(View view)
     {
+        Intent intent = new Intent(this, TaskActivity.class);
+        startActivity(intent);
 //        int id = item.getItemId();
 //        switch (id)
-        {
         //    case R.id.action_add_task:
-                Log.d("MainActivity", "New task has been added");
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Add a task");
-                builder.setMessage("Please add your task here:");
-                final EditText inputField = new EditText(this);
-                builder.setView(inputField);
-                builder.setPositiveButton("Add", new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i)
-                    {
-                        Log.d("MainActivity", inputField.getText().toString());
-                        String task = inputField.getText().toString();
-
-                        taskDBHelper = new TaskDBHelper(MainActivity.this);
-                        SQLiteDatabase sqLiteDatabase = taskDBHelper.getWritableDatabase();
-                        ContentValues values = new ContentValues();
-                        values.clear();
-                        values.put(TaskContract.Columns.TASK, task);
-                        sqLiteDatabase.insertWithOnConflict(TaskContract.TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
-                        updateUI();
-
-                    }
-                });
-                builder.setNegativeButton("Cancel", null);
-                builder.create().show();
+//                Log.d("MainActivity", "New task has been added");
+//                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//                builder.setTitle("Add a task");
+//                builder.setMessage("Please add your task here:");
+//                final EditText inputField = new EditText(this);
+//                builder.setView(inputField);
+//                builder.setPositiveButton("Add", new DialogInterface.OnClickListener(){
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i)
+//                    {
+//                        Log.d("MainActivity", inputField.getText().toString());
+//                        String task = inputField.getText().toString();
+//
+//                        taskDBHelper = new TaskDBHelper(MainActivity.this);
+//                        SQLiteDatabase sqLiteDatabase = taskDBHelper.getWritableDatabase();
+//                        ContentValues values = new ContentValues();
+//                        values.clear();
+//                        values.put(TaskContract.Columns.TASK, task);
+//                        sqLiteDatabase.insertWithOnConflict(TaskContract.TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+//                        updateUI();
+//
+//                    }
+//                });
+//                builder.setNegativeButton("Cancel", null);
+//                builder.create().show();
 //                return true;
 //            default:
 //                return false;
-        }
 
 
     }
 //
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        return false;
+    }
+}
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        switch (id)
-        {
-            case R.id.action_add_task:
-                Log.d("MainActivity", "New task has been added");
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Add a task");
-                builder.setMessage("Please add your task here:");
-                final EditText inputField = new EditText(this);
-                builder.setView(inputField);
-                builder.setPositiveButton("Add", new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i)
-                    {
-                        Log.d("MainActivity", inputField.getText().toString());
-                        String task = inputField.getText().toString();
+//        int id = item.getItemId();
+//        switch (id)
+//        {
+//            case R.id.action_add_task:
+//                Log.d("MainActivity", "New task has been added");
+//                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//                builder.setTitle("Add a task");
+//                builder.setMessage("Please add your task here:");
+//                final EditText inputField = new EditText(this);
+//                builder.setView(inputField);
+//                builder.setPositiveButton("Add", new DialogInterface.OnClickListener(){
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i)
+//                    {
+//                        Log.d("MainActivity", inputField.getText().toString());
+//                        String task = inputField.getText().toString();
+//
+//                        taskDBHelper = new TaskDBHelper(MainActivity.this);
+//                        SQLiteDatabase sqLiteDatabase = taskDBHelper.getWritableDatabase();
+//                        ContentValues values = new ContentValues();
+//                        values.clear();
+//                        values.put(TaskContract.Columns.TASK, task);
+//                        sqLiteDatabase.insertWithOnConflict(TaskContract.TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+//                        updateUI();
+//
+//                    }
+//                });
+//                builder.setNegativeButton("Cancel", null);
+//                builder.create().show();
+//                return true;
+//            default:
+//                return false;
+//        }
+//
+//
+//    }
 
-                        taskDBHelper = new TaskDBHelper(MainActivity.this);
-                        SQLiteDatabase sqLiteDatabase = taskDBHelper.getWritableDatabase();
-                        ContentValues values = new ContentValues();
-                        values.clear();
-                        values.put(TaskContract.Columns.TASK, task);
-                        sqLiteDatabase.insertWithOnConflict(TaskContract.TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
-                        updateUI();
-
-                    }
-                });
-                builder.setNegativeButton("Cancel", null);
-                builder.create().show();
-                return true;
-            default:
-                return false;
-        }
-
-
-    }
-
-}
+//}

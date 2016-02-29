@@ -25,4 +25,24 @@
         android:layout_alignParentEnd="true"
         android:onClick="onDoneButtonClick"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notify a friend"
+        android:id="@+id/friendButton"
+        android:layout_below="@+id/taskTextView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onFriendButtonClick"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set deadline"
+        android:id="@+id/deadlineButton"
+        android:layout_below="@+id/friendButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onDeadlineButtonClick"/>
+
 </RelativeLayout>
