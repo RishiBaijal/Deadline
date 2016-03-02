@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ColorPrimary">#FF5722</color>
-    <color name="ColorPrimaryDark">#e61e1b</color>
+    <color name="primary">#ff46a9bd</color>
+    <color name="primaryDark">#ff0493bd</color>
+    <color name="primaryLight">#fffffefd</color>
+    <color name="meterGauge">@color/primaryDark</color>
+    <color name="meterBackground">#fffffefd</color>
+    <color name="horizontalGauge">@color/primaryDark</color>
+    <color name="target">#fff55000</color>
+    <color name="accent">#fff5af00</color>
+    <color name="productive_fill">#bc46a9bd</color>
+    <color name="usage_fill">#80ffb600</color>
+    <color name="transparent">#00000000</color>
+    <color name="graph_text">#ff6d6a6a</color>
 </resources>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<resources>-->
+    <!--<color name="ColorPrimary">#FF5722</color>-->
+    <!--<color name="ColorPrimaryDark">#e61e1b</color>-->
+<!--</resources>-->
